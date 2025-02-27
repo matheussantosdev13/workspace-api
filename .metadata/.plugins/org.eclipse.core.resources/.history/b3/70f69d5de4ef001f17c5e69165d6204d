@@ -1,0 +1,40 @@
+package dao;
+
+import java.util.List;
+
+import model.Tarefa;
+import service.TarefaService;
+
+public class TesteBanco {
+	
+	
+
+    public static void main(String[] args) {
+        TarefaService service = new TarefaService();
+        
+        int idTarefa = 2;
+        
+        Tarefa tarefa = service.buscarPorId(idTarefa);
+        
+        if (tarefa != null) {
+            System.out.println(tarefa);
+        } else {
+            System.out.println("Tarefa não encontrada.");
+        }
+        
+        public static void main1(String[] args) {
+    		/*
+    		System.out.println(Dao.getStatusConexao());
+    		Connection conexao = Dao.getConexao();
+    		System.out.println(Dao.getStatusConexao());
+    		*/
+    		
+    		TarefaService service = new TarefaService();
+    		
+    		List<Tarefa> lista = service.listar();
+    		
+    		for(Tarefa t: lista) {
+    			System.out.println(t);
+     }
+ }
+ }

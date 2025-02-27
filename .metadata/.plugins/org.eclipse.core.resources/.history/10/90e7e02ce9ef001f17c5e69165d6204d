@@ -1,0 +1,30 @@
+package service;
+
+import java.util.List;
+
+import dao.TarefaDAO;
+import model.Tarefa;
+
+public class TarefaService {
+
+    public List<Tarefa> listar() {
+        try {
+            TarefaDAO dao = new TarefaDAO();
+            return dao.listar();
+        } catch (Exception e) {
+            e.printStackTrace();  
+            return null;  
+        }
+    }
+
+    public Tarefa buscarPorId(Integer id) {
+        try {
+            TarefaDAO dao = new TarefaDAO();
+            return dao.buscarPorId(id);
+        } catch (Exception e) {
+            e.printStackTrace();  
+            return null;  
+        }
+ 
+    }
+}

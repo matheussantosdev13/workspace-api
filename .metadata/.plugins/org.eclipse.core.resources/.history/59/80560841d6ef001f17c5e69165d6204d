@@ -1,0 +1,27 @@
+import java.util.List;
+
+import dao.TarefaDAO;
+import model.Tarefa;
+
+public class TarefaService {
+
+    public List<Tarefa> listar() {
+        try {
+            TarefaDAO dao = new TarefaDAO();
+            return dao.listar();
+        } catch (Exception e) {
+            e.printStackTrace();  // Exibe o erro no console
+            return null;  // Retorna null em caso de erro
+        }
+    }
+
+    public Tarefa buscarPorId(int id) {
+        try {
+            TarefaDAO dao = new TarefaDAO();
+            return dao.buscarPorId(id);
+        } catch (Exception e) {
+            e.printStackTrace();  // Exibe o erro no console
+            return null;  // Retorna null em caso de erro
+        }
+    }
+}

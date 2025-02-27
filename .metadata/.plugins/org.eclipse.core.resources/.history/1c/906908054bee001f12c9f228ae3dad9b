@@ -1,0 +1,20 @@
+package dao;
+
+import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.List;
+
+import model.Tarefa;
+
+public class TarefaDAO {
+	public List<Tarefa> listar(){
+		List<Tarefa> lista = new ArrayList<Tarefa>; 
+		
+		Connection cnx = Dao.getConexao();
+		
+		String SQL = "SELECT * FROM tarefas";
+		
+		return lista;
+	}
+	
+}

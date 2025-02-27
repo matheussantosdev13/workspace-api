@@ -1,0 +1,81 @@
+package dao;
+
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+import model.Tarefa;
+
+public class TarefaDao {
+
+    private Connection connection;
+
+    public TarefaDao() {
+        this.connection = Dao.getConexao();
+    }
+
+    // Método para inserir uma nova tarefa
+    public void inserirTarefa(Tarefa tarefa) {
+        String sql = "INSERT INTO tarefas (descricao, prazo, finalizada) VALUES (?, ?, ?)";
+
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, tarefa.getDescricao());
+            stmt.setDate(2, Date.valueOf(tarefa.getPrazo()));
+            stmt.setBoolean(3, tarefa.isConcluida()); // Usando 'finalizada' no banco
+
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Método para listar todas as tarefas
+    public List<Tarefa> listarTarefas() {
+        List<Tarefa> tarefas = new ArrayList<>();
+        String sql = "SELECT * FROM tarefas";
+
+        try (Statement stmt = connection.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+                Tarefa tarefa = new Tarefa();
+                tarefa.setId(rs.getInt("id"));
+                tarefa.setDescricao(rs.getString("descricao"));
+                tarefa.setPrazo(rs.getDate("prazo").toLocalDate());
+                tarefa.setFinalizada(rs.getBoolean("finalizada")); // Usando 'finalizada' no banco
+                tarefas.add(tarefa);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return tarefas;
+    }
+
+    // Método para atualizar o status de uma tarefa (concluída ou não)
+    public void atualizarTarefa(Tarefa tarefa) {
+        String sql = "UPDATE tarefas SET descricao = ?, prazo = ?, finalizada = ? WHERE id = ?";
+
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, tarefa.getDescricao());
+            stmt.setDate(2, Date.valueOf(tarefa.getPrazo()));
+            stmt.setBoolean(3, tarefa.isConcluida()); // Usando 'finalizada' no banco
+            stmt.setInt(4, tarefa.getId());
+
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Método para excluir uma tarefa
+    public void excluirTarefa(int id) {
+        String sql = "DELETE FROM tarefas WHERE id = ?";
+
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+}

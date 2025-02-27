@@ -1,0 +1,48 @@
+package model;
+
+import java.sql.Date;  // Importação para utilizar java.sql.Date
+
+public class Tarefa {
+    private Integer id;
+    private String descricao;
+    private Date prazo;  // Alterado para Date, para refletir o tipo de dado DATE no banco de dados
+    private Boolean concluida;
+
+    // Getters e Setters
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public Date getPrazo() {
+        return prazo;
+    }
+
+    public void setPrazo(Date prazo) {
+        this.prazo = prazo;
+    }
+
+    public Boolean getConcluida() {
+        return concluida;
+    }
+
+    public void setConcluida(Boolean concluida) {
+        this.concluida = concluida;
+    }
+
+    @Override
+    public String toString() {
+        return "Tarefa [id=" + id + ", descricao=" + descricao + ", prazo=" + prazo + ", concluida=" + concluida + "]";
+    }
+}

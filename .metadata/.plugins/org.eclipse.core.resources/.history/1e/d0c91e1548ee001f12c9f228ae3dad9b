@@ -1,0 +1,9 @@
+package model;
+
+public class Tarefa {
+	private Integer id;
+	private String descricao;
+	private Integer prazo; 
+	private Boolean concluida;
+
+}

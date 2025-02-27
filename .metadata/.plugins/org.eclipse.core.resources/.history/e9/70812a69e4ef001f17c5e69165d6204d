@@ -1,0 +1,38 @@
+package dao;
+
+import java.util.List;
+import java.util.Scanner;
+
+import model.Tarefa;
+import service.TarefaService;
+
+public class TesteBanco {
+
+	public static void main(String[] args) {
+		/*
+		System.out.println(Dao.getStatusConexao());
+		Connection conexao = Dao.getConexao();
+		System.out.println(Dao.getStatusConexao());
+		*/
+		
+		TarefaService service = new TarefaService();
+		
+		List<Tarefa> lista = service.listar();
+		
+		for(Tarefa t: lista) {
+			System.out.println(t);
+		}
+		
+		System.out.println("---------------------------------");
+		
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Qual tarefa voc~e quer consultar?");
+		int criterio = scanner.nextInt();
+		
+		System.out.println(service.buscarPorId(criterio));
+
+
+		
+	}
+
+}

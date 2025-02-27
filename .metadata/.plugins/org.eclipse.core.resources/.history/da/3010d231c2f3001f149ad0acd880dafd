@@ -1,0 +1,50 @@
+package dao;
+
+import java.util.List;
+import java.util.Scanner;
+
+import model.Tarefa;
+import service.TarefaService;
+
+public class TesteBanco {
+
+    public static void main(String[] args) {
+        /*
+        System.out.println(Dao.getStatusConexao());
+        Connection conexao = Dao.getConexao();
+        System.out.println(Dao.getStatusConexao());
+        */
+        
+        TarefaService service = new TarefaService();
+        
+        List<Tarefa> lista = service.listar();
+        System.out.println("Lista de Tarefas:");
+        for (Tarefa t : lista) {
+            System.out.println(t);
+        }
+        
+        System.out.println("---------------------------------");
+        
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Qual tarefa você quer consultar pelo ID?");
+        int criterioId = scanner.nextInt();
+        System.out.println("Tarefa com ID " + criterioId + ":");
+        System.out.println(service.buscarPorId(criterioId));
+
+        System.out.println("---------------------------------");
+        
+        System.out.println("Qual termo deseja buscar na descrição?");
+        String criterioDescricao = scanner.next();
+        
+        List<Tarefa> tarefasPorDescricao = service.buscarPorDescricao(criterioDescricao);
+        
+        if (tarefasPorDescricao.isEmpty()) {
+            System.out.println("Nenhuma tarefa encontrada com esse termo.");
+        } else {
+            System.out.println("Tarefas encontradas com a descrição contendo '" + criterioDescricao + "':");
+            for (Tarefa t : tarefasPorDescricao) {
+                System.out.println(t);
+            }
+        }
+    }
+}

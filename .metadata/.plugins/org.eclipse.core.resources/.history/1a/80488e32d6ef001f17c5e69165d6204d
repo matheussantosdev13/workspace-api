@@ -1,0 +1,18 @@
+import java.util.List;
+import dao.TarefaDAO;  // Certifique-se de importar a classe TarefaDAO
+import model.Tarefa;
+
+public class TarefaService {
+
+    // Método para listar todas as tarefas
+    public List<Tarefa> listar() {
+        TarefaDAO dao = new TarefaDAO();
+        return dao.listar();
+    }
+
+    // Método para buscar uma tarefa pelo ID
+    public Tarefa buscarPorId(int id) {
+        TarefaDAO dao = new TarefaDAO();
+        return dao.buscarPorId(id);
+    }
+}

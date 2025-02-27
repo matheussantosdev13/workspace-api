@@ -1,0 +1,26 @@
+package dao;
+
+import java.util.List;
+
+import model.Tarefa;
+import service.TarefaService;
+
+public class TesteBanco {
+
+	public static void main(String[] args) {
+		/*
+		System.out.println(Dao.getStatusConexao());
+		Connection conexao = Dao.getConexao();
+		System.out.println(Dao.getStatusConexao());
+		*/
+		
+		TarefaService service = new TarefaService();
+		
+		List<Tarefa> lista = service.listar();
+		
+		for(Tarefa t: lista) {
+			System.out.println(t);
+		}
+	}
+
+}

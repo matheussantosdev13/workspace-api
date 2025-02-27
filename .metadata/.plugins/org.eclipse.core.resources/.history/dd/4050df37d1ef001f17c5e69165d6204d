@@ -1,0 +1,21 @@
+package dao;
+
+import java.util.List;
+
+import model.Tarefa;
+import service.TarefaService;
+
+public class TesteBanco {
+
+    public static void main(String[] args) {
+        TarefaDao banco = new TarefaDao();
+        
+        TarefaService service = new TarefaService();
+
+        List<Tarefa> lista = banco.listarTarefas();
+
+        for (Tarefa t : lista) {
+            System.out.println(t);
+        }
+    }
+}

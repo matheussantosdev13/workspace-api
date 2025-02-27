@@ -1,0 +1,48 @@
+package dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import model.Tarefa;
+
+public class TarefaDAO {
+    // Método para buscar uma tarefa pelo id
+    public Tarefa buscarPorId(int id) {
+        Tarefa tarefa = null;
+
+        // Obtendo conexão com o banco de dados
+        Connection cnx = Dao.getConexao();
+
+        // SQL para buscar uma tarefa específica pelo id
+        String SQL = "SELECT * FROM tarefas WHERE id = ?";
+
+        PreparedStatement ps;
+
+        try {
+            // Preparando a consulta SQL
+            ps = cnx.prepareStatement(SQL);
+            ps.setInt(1, id);  // Definindo o valor do id no PreparedStatement
+
+            // Executando a consulta
+            ResultSet rs = ps.executeQuery();
+
+            // Verificando se encontrou algum registro
+            if (rs.next()) {
+                tarefa = new Tarefa();
+
+                // Populando o objeto tarefa com os dados retornados
+                tarefa.setId(rs.getInt("id"));
+                tarefa.setDescricao(rs.getString("descricao"));
+                tarefa.setPrazo(rs.getInt("prazo"));
+                tarefa.setFinalizada(rs.getBoolean("finalizada"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        // Retornando a tarefa encontrada ou null caso não tenha sido encontrada
+        return tarefa;
+    }
+}

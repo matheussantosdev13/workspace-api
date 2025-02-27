@@ -1,0 +1,28 @@
+package service;
+
+import java.util.List;
+import dao.TarefaDao;  // Correct the import for consistency
+import model.Tarefa;
+
+public class TarefaService {
+
+    public boolean IncluirTarefa(Tarefa tarefa) {
+        TarefaDao dao = new TarefaDao();  // Use TarefaDao consistently
+        return dao.incluirTarefa(tarefa);  // Assuming the method in TarefaDao is called incluirTarefa
+    }
+
+    public List<Tarefa> buscarPorDescricao(String valor) {
+        TarefaDao dao = new TarefaDao();  // Use TarefaDao consistently
+        return dao.buscarPorDescricao(valor);
+    }
+
+    public Tarefa buscarPorId(Integer id) {
+        TarefaDao dao = new TarefaDao();  // Use TarefaDao consistently
+        return dao.buscarPorId(id);
+    }
+
+    public List<Tarefa> listar() {
+        TarefaDao dao = new TarefaDao();  // Use TarefaDao consistently
+        return dao.listar();
+    }
+}

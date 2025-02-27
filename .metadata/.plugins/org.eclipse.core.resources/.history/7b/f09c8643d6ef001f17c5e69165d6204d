@@ -1,0 +1,16 @@
+public class TesteBanco {
+
+    public static void main(String[] args) {
+        TarefaService service = new TarefaService();
+        
+        int idTarefa = 1;
+        
+        Tarefa tarefa = service.buscarPorId(idTarefa);
+        
+        if (tarefa != null) {
+            System.out.println(tarefa);
+        } else {
+            System.out.println("Tarefa não encontrada.");
+        }
+    }
+}

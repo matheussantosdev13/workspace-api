@@ -1,0 +1,48 @@
+package dao;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class Dao {
+    public static String status = "Desconectado...";
+
+    public static Connection getConexao() {
+        Connection cnx = null;
+        
+        String driverName = "com.mysql.cj.jdbc.Driver";
+        
+        try {
+            // Load the MySQL JDBC driver
+            Class.forName(driverName);
+
+            // Define the database connection parameters
+            String serverName = "localhost";  // Hostname
+            String port = "3306";  // MySQL port
+            String dataBase = "gerenciador";  // Database name
+            String url = "jdbc:mysql://" + serverName + ":" + port + "/" + dataBase;  // Corrected URL format
+
+            String user = "root";  // MySQL username
+            String password = "";  // MySQL password
+
+            // Establish the connection
+            cnx = DriverManager.getConnection(url, user, password);
+
+            // Check the connection status
+            if (cnx != null) {
+                status = "STATUS --> Conectado com sucesso";
+            } else {
+                status = "STATUS --> Não foi possível estabelecer uma conexão";
+            }
+
+            return cnx;
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+}
